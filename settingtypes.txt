@@ -1,0 +1,14 @@
+[Mobs Andes]
+
+[Animals]
+
+mobs_andes.alpaca (Enable Alpaca) bool true
+    Enable or disable the Alpaca mob entirely.
+
+mobs_andes.donkey (Enable Donkey) bool true
+    Enable or disable the Donkey mob entirely.
+
+mobs_andes.eat_grass_block (Allow grass block eating) bool false
+    When true, alpacas can eat dirt_with_grass blocks, converting
+    them to plain dirt. This may alter terrain appearance.
+    Disabled by default to be conservative about world changes.
