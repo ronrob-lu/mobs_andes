@@ -38,6 +38,7 @@ end
 -- ============================================================
 load_animal("alpaca")
 load_animal("donkey")
+load_animal("dog")
 
 -- Load custom spawning override if found
 if mobs.custom_spawn_andes then

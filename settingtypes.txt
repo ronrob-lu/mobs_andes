@@ -12,3 +12,7 @@ mobs_andes.eat_grass_block (Allow grass block eating) bool false
     When true, alpacas can eat dirt_with_grass blocks, converting
     them to plain dirt. This may alter terrain appearance.
     Disabled by default to be conservative about world changes.
+
+mobs_andes.dog (Enable Dog) bool true
+    Enable or disable the Dog watchdog mob entirely.
+

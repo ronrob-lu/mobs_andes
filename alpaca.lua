@@ -194,9 +194,10 @@ for _, col in ipairs(alpaca_colours) do
 		-- If it still looks sideways after 180, swap to 90 or 270.
 		rotate          = 180,
 
-		-- Sounds (none included yet; add alpaca_idle.ogg etc. to sounds/)
+		-- Sounds
 		sounds = {
-			-- random = "mobs_alpaca",  -- uncomment when sounds are added
+			random = "mobs_andes_alpaca_cough",
+			replace = "mobs_andes_alpaca_eating",
 		},
 		makes_footstep_sound = true,
 

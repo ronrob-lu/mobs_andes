@@ -200,7 +200,12 @@ mobs:register_mob("mobs_andes:donkey", {
 	rotate          = 180,
 
 	-- Sounds
-	sounds = {},
+	sounds = {
+		random = "mobs_andes_donkey_random",
+		damage = "mobs_andes_donkey_scream",
+		death = "mobs_andes_donkey_scream",
+		replace = "default_dig_crumbly",
+	},
 	makes_footstep_sound = true,
 
 	-- -------------------------------------------------------
