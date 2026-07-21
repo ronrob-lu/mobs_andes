@@ -1,203 +1,59 @@
-# Mobs Andes
+# Mobs Andes 🦙
 
-**A Luanti / Minetest mod adding animals from the Andes region of South America.**
+**Bring the vibrant, rugged spirit of the South American Andes to your Luanti (Minetest) world!**
 
-This is a mod for the [mobs (mobs_redo)](https://content.luanti.org/packages/TenPlus1/mobs/) framework. It is **not** a fork of *mobs_animal* — it depends only on the base `mobs` mod so it can be installed independently alongside (or without) other animal mods.
+*Mobs Andes* is a high-quality companion animal mod built for the `mobs_redo` framework. Unlike heavy, monolithic animal packs, it is designed from the ground up to be lightweight, modular, and perfectly compatible with your favorite world generators and mods.
 
-> **Current version (0.1):** Only the **Alpaca** is included.  
-> More Andean animals are planned — see [Roadmap](#roadmap).
-
----
-
-## Screenshot
-
-*(No screenshot yet — spawn an alpaca with its egg and explore!)*
+Whether you are looking for a loyal protector for your home, a hardy mount to cross mountain peaks, or a source of luxuriously soft wool, *Mobs Andes* adds life, utility, and charm to your adventures.
 
 ---
 
-## Animals
+## Meet the Animals
 
-### 🦙 Alpaca (*Vicugna pacos*)
+### 🦙 The Alpaca (*Vicugna pacos*)
+Prized worldwide for their soft, warm fleece, these peaceful grazers roam the grassy high plains. Tame them with wheat or grass, shear them, and build with their beautiful wool!
+- **Natural Colors**: Alpacas spawn in three gorgeous, natural coat colors:
+  - 🟤 **Light Fawn** — the classic, warm beige-tan
+  - 🟫 **Dark Fawn** — a rich, deep earthy brown
+  - 🪙 **Light Silver Gray** — a sleek, modern silver-gray
+- **Behavior**: They peacefully graze on grass, flee when attacked, and can be tamed, bred, and captured with a lasso to guide them home.
 
-The alpaca is a domesticated South American camelid, native to the high Andean plateau (altiplano). It is prized worldwide for its luxuriously soft **fleece**, which comes in 16 natural colours.
+### 🫏 The Donkey (*Equus asinus*)
+The ultimate high-altitude travel partner. Donkeys are exceptionally hardy pack animals that make traversing steep terrain a breeze.
+- **Riding & Autopilot**: Equip a donkey with a saddle to ride them! If you want to sit back and take in the view, enable the built-in **autopilot mode** (press your special/aux1 key) to let your mount navigate the path automatically.
+- **Behavior**: They wander grassy biomes, graze calmly, and follow players holding grass or wheat.
 
-| Property         | Value |
-|-----------------|-------|
-| Health          | 8 – 16 HP |
-| Passive         | Yes (flees when hit) |
-| Walk speed      | 1.2 |
-| Run speed       | 3.5 (alpacas are surprisingly fast!) |
-| Drops on death  | 1–2× Raw Meat + 1–2× Light Fawn Wool |
-| Taming food     | Wheat, grass, barley, oat, rye (8× to tame) |
-| Spawns on       | `default:dirt_with_grass` (same biomes as cows) |
-
-#### Behaviour
-- Wanders peacefully and **grazes on grass** nodes as it walks.
-- **Runs away** when attacked.
-- Can be **tamed** and **bred** by feeding it wheat or grass 8 times.
-- Can be **captured** with a magic lasso (mobs item).
-- Right-click with a net / lasso item to capture a tamed alpaca.
-
-#### Colour / Wool
-The current alpaca has a **light fawn** coat — the most common natural colour. The wool item is `mobs_andes:wool_light_fawn`.
-
-> See [Adding More Colours](#adding-more-alpaca-colours) for how to extend this.
+### 🐕 The Domestic Guard Dog (*Canis lupus familiaris*)
+A loyal guardian for your homestead. The domestic guard dog is more than just a pet—it is a fierce protector.
+- **Homestead Protection**: Once tamed with raw meat, your guard dog will follow you faithfully. If hostile mobs or intruders threaten you, your companion will immediately leap to your defense!
+- **Commands & Care**: Right-click your dog to order them to "stay" (guarding a specific spot) or "follow". Feed them meat to heal their wounds and permanently increase their maximum health.
 
 ---
 
-## Dependencies
+## Installation & Setup
 
-| Dependency | Required? | Notes |
-|---|---|---|
-| `mobs` (mobs_redo) | ✅ Required | Provides the mob API |
-| `default` | Optional | Used for grass / dirt nodes |
-| `ethereal` | Optional | Adds extra spawn biomes |
-| `mobs_animal` | ❌ Not required | This mod is independent |
+1. Make sure you have the [mobs (mobs_redo)](https://content.luanti.org/packages/TenPlus1/mobs/) mod installed and enabled.
+2. Download or clone this repository and place the folder inside your Luanti `mods/` directory.
+3. Rename the directory to **`mobs_andes`**.
+4. Enable `mobs_andes` in your world configuration.
 
----
-
-## Installation
-
-1. Download or clone this repository.
-2. Place the folder in your Luanti `mods/` directory.  
-   The folder must be named **`mobs_andes`**.
-3. Enable the mod in your world settings.
-4. Make sure `mobs` (mobs_redo) is also enabled.
-
----
-
-## Spawning
-
-Alpacas spawn in the same conditions as cows:
-- On `default:dirt_with_grass` (and `ethereal:green_dirt` if present).
-- Need nearby grass (neighbour node in the `grass` group).
-- Minimum light level 14.
-- Daytime only.
-- Height range: 5 – 200 nodes.
-
-### Custom Spawn File
-
-Create a `spawn.lua` file inside the `mobs_andes` mod folder to override all built-in spawn rules. The init will detect it automatically and skip the default spawn block.
-
-### Settings (`minetest.conf`)
-
+### Configuration
+You can tweak settings directly in your `minetest.conf` file:
 ```ini
-# Disable individual animals
-mobs_andes.alpaca = false
-
-# Allow alpacas (and cows/sheep) to eat grass *blocks* (dirt_with_grass)
-# This can alter terrain — disabled by default
+# Prevent animals from eating grass blocks (disabling keeps the grass green!)
 mobs_andes.eat_grass_block = false
+
+# Enable or disable individual mobs
+mobs_andes.alpaca = true
+mobs_andes.donkey = true
+mobs_andes.dog = true
 ```
 
 ---
 
-## Adding More Alpaca Colours
+## Licenses & Credits
 
-The alpaca is designed so that multiple colour variants can be added with minimal effort.
-
-### Steps
-
-1. **Add an entry to `alpaca_colours`** in `alpaca.lua`:
-
-   ```lua
-   {"white", S("White Alpaca"), "texture_alpaca_white.png", "wool:white"},
-   ```
-
-   Format: `{ colour_key, display_name, texture_file, wool_item }`
-
-2. **Add the model texture** to `textures/`:
-   ```
-   textures/texture_alpaca_white.png
-   ```
-
-3. **Add the wool inventory texture** (used on the spawn egg):
-   ```
-   textures/wool_white.png
-   ```
-   If the wool item is from another mod (e.g. `wool:white` from the *wool* mod), you still need the texture here for the spawn egg overlay — or use that mod's texture directly.
-
-4. **Register the wool item** (if it doesn't already exist):
-   ```lua
-   core.register_craftitem("mobs_andes:wool_white", {
-       description = S("White Alpaca Wool"),
-       inventory_image = "wool_white.png",
-       groups = {wool = 1},
-   })
-   ```
-   Skip this step if you're reusing e.g. `wool:white`.
-
-5. **Add spawning** for the new variant in the spawn section (or in `spawn.lua`).
-
-### The 16 Official Alpaca Colours
-
-```
-white           light_fawn      medium_fawn     dark_fawn
-light_brown     medium_brown    dark_brown      bay_black
-true_black      silver_grey     medium_silver_grey  dark_silver_grey
-light_rose_grey medium_rose_grey dark_rose_grey  roan
-```
-
----
-
-## Model & Animations
-
-- **Model:** `models/alpaca.gltf` (Blockbench export)
-- **Texture:** `textures/texture_alpaca.png` (light fawn colour)
-
-The gltf model has four named animations. Because gltf uses **time (seconds)** instead of frame numbers:
-
-| Animation | Duration | Used for |
-|-----------|----------|----------|
-| `stand`   | 0 – 2.0 s | Idle standing |
-| `walk`    | 0 – 2.0 s | Walking |
-| `run`     | 0 – 1.375 s | Running / fleeing |
-| `eat`     | 0 – 2.5 s | Grazing (stand1 variant) |
-
-> **Note for modders:** Set `speed_normal = 1.0` and `*_speed = 1.0` when working with gltf animations. The engine interprets the x/y values as seconds, not frame numbers.
-
----
-
-## File Structure
-
-```
-mobs_andes/
-├── init.lua              — Main entry point; loads animal files
-├── mod.conf              — Mod metadata
-├── alpaca.lua            — Alpaca mob definition
-├── LICENCE.md            — Licence
-├── README.md             — This file
-├── models/
-│   └── alpaca.gltf       — 3-D model with animations
-└── textures/
-    ├── texture_alpaca.png     — Alpaca body texture (light fawn)
-    ├── wool_light_fawn.png    — Light fawn wool inventory icon
-    └── mobs_alpaca_inv.png    — Spawn egg inventory image
-```
-
----
-
-## Roadmap
-
-Animals planned for future releases (contributions welcome!):
-
-- 🦙 **Llama** (*Lama glama*) — larger, used as a pack animal
-- 🐾 **Vicuña** (*Vicugna vicugna*) — wild relative, very fine wool
-- 🐾 **Guanaco** (*Lama guanicoe*) — wild, high-altitude
-- 🦅 **Andean Condor** (*Vultur gryphus*) — flying mob
-- 🐻 **Spectacled Bear** (*Tremarctos ornatus*) — rare passive/hostile
-- 🦎 **Giant Andean Lizard** — passive mob
-
----
-
-## Licence
-
-See [LICENCE.md](LICENCE.md).
-
----
-
-## Credits
-
-- **Model & Textures:** ronrob-lu  
-- **Mod framework:** based on [mobs_redo](https://notabug.org/TenPlus1/mobs_redo) by TenPlus1  
-- Inspired by *mobs_animal* (sirrobzeroone, PilzAdam, KrupnoPavel and contributors)
+- **Code**: Licensed under the MIT License (see [LICENCE.md](LICENCE.md)).
+- **Graphics (Models & Textures)**: Created by **ronrob-lu** and released under the **Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0)** license.
+- **Mod Framework**: Built on [mobs_redo](https://content.luanti.org/packages/TenPlus1/mobs/) by TenPlus1.
+- **Inspiration**: Inspired by the classic *mobs_animal* mod.
