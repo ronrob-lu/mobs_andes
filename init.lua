@@ -6,6 +6,7 @@
 -- It only depends on 'mobs' (mobs_redo) and is structured so
 -- additional animals can be added easily.
 
+local S = core.get_translator("mobs_andes")
 local path = core.get_modpath(core.get_current_modname()) .. "/"
 
 -- Check for custom mob spawn file (allows server admins to override spawning)
@@ -23,7 +24,7 @@ end
 -- ============================================================
 local function load_animal(mob)
 	if core.settings:get_bool("mobs_andes." .. mob) == false then
-		print("[Mobs_Andes] " .. mob .. " disabled via settings.")
+		print(S("[Mobs_Andes] @1 disabled via settings.", mob))
 		return
 	end
 	dofile(path .. mob .. ".lua")
@@ -45,4 +46,4 @@ if mobs.custom_spawn_andes then
 	dofile(path .. "spawn.lua")
 end
 
-print("[MOD] Mobs Andes loaded")
+print(S("[MOD] Mobs Andes loaded"))

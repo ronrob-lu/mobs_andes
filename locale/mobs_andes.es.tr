@@ -1,0 +1,17 @@
+# textdomain: mobs_andes
+Light Fawn Alpaca=Alpaca leonado claro
+Dark Fawn Alpaca=Alpaca leonado oscuro
+Light Silver Gray Alpaca=Alpaca gris plata claro
+Light Fawn Alpaca Wool=Lana de alpaca leonado claro
+Dark Fawn Alpaca Wool=Lana de alpaca leonado oscuro
+Light Silver Gray Alpaca Wool=Lana de alpaca gris plata claro
+Dog has been tamed!=¡El perro ha sido domesticado!
+Dog is now following you.=El perro ahora te sigue.
+Dog is now staying here.=El perro ahora se queda aquí.
+Dog=Perro
+Donkey=Burro
+Donkey autopilot: ENABLED (W/S/A/D to manual control)=Piloto automático del burro: ACTIVADO (W/S/A/D para control manual)
+Donkey autopilot: DISABLED=Piloto automático del burro: DESACTIVADO
+Donkey autopilot: DISABLED (Manual Override)=Piloto automático del burro: DESACTIVADO (Control manual)
+[MOD] Mobs Andes loaded=[MOD] Mobs Andes cargado
+[Mobs_Andes] @1 disabled via settings.=[Mobs_Andes] @1 desactivado en la configuración.

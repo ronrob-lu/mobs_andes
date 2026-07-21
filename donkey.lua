@@ -324,9 +324,9 @@ mobs:register_mob("mobs_andes:donkey", {
 				if aux1_pressed and not self.prev_aux1_pressed then
 					self.autopilot = not self.autopilot
 					if self.autopilot then
-						core.chat_send_player(self.driver:get_player_name(), "Donkey autopilot: ENABLED (W/S/A/D to manual control)")
+						core.chat_send_player(self.driver:get_player_name(), S("Donkey autopilot: ENABLED (W/S/A/D to manual control)"))
 					else
-						core.chat_send_player(self.driver:get_player_name(), "Donkey autopilot: DISABLED")
+						core.chat_send_player(self.driver:get_player_name(), S("Donkey autopilot: DISABLED"))
 					end
 				end
 				self.prev_aux1_pressed = aux1_pressed
@@ -335,7 +335,7 @@ mobs:register_mob("mobs_andes:donkey", {
 				if ctrl.up or ctrl.down or ctrl.left or ctrl.right or ctrl.jump then
 					if self.autopilot then
 						self.autopilot = false
-						core.chat_send_player(self.driver:get_player_name(), "Donkey autopilot: DISABLED (Manual Override)")
+						core.chat_send_player(self.driver:get_player_name(), S("Donkey autopilot: DISABLED (Manual Override)"))
 					end
 				end
 
