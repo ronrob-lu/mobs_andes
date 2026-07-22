@@ -43,6 +43,13 @@ local dog_follow = {
 	"mcl_mobitems:cooked_rabbit"
 }
 
+-- Random name list for tamed dogs
+local dog_names = {
+	"Mateo", "Diego", "Bruno", "Pablo", "Javier", "Paco", "Carlos", "Chico",
+	"Zorro", "Nacho", "Bandido", "Churro", "Rey", "Oso", "Eladio", "Lobo",
+	"Gordito", "Pluto", "Toro", "Perro", "Sombra", "Rocky", "Robin"
+}
+
 -- Helper: check if watchdog should attack the target
 local function should_attack(self, target)
 	-- Do not attack if dog is not tamed or has no owner
@@ -112,7 +119,7 @@ mobs:register_mob("mobs_andes:dog", {
 
 	-- Physics
 	collisionbox    = {-0.3, 0.0, -0.3, 0.3, 0.75, 0.3}, -- Small size to traverse 1-block holes
-	stepheight      = 0.6,
+	stepheight      = 1.1,
 	walk_velocity   = 1.5,
 	run_velocity    = 3.2,
 	jump            = true,
@@ -169,6 +176,40 @@ mobs:register_mob("mobs_andes:dog", {
 		if not self.custom_init_done then
 			self.custom_init_done = true
 			self.walk_velocity_default = self.walk_velocity or 1.5
+
+			-- Custom update_tag: displays just the name in the nametag when tamed
+			self.update_tag = function(s, newname)
+				local prop = s.object and s.object:get_properties()
+				if not prop then return end
+
+				if newname or (s._nametag and s._nametag ~= "") then
+					s._nametag = newname or s._nametag
+				end
+
+				-- If tamed and has no name, pick a random name from dog_names
+				if s.tamed and (not s._nametag or s._nametag == "") then
+					s._nametag = dog_names[math.random(#dog_names)]
+				end
+
+				local display_nametag = (s.tamed or (s._nametag and s._nametag ~= "")) and (s._nametag or "") or ""
+				local name_prefix = (s._nametag and s._nametag ~= "") and s._nametag or S("Dog")
+
+				local hp_current = s.health or s.object:get_hp() or 15
+				local hp_max = s.hp_max or prop.hp_max or 15
+				local infotext = name_prefix
+				if s.tamed and s.owner and s.owner ~= "" then
+					infotext = infotext .. " (" .. S("Owner: @1", s.owner) .. ")"
+				end
+				infotext = infotext .. "\n" .. S("Health: @1 / @2", hp_current, hp_max)
+
+				s.object:set_properties({
+					nametag = display_nametag,
+					nametag_color = s.nametag_col or "#00FF00",
+					infotext = infotext,
+				})
+			end
+
+			self:update_tag()
 
 			-- Capture/override set_animation to map walk to run at higher speeds
 			local orig_set_anim = self.set_animation
@@ -238,6 +279,13 @@ mobs:register_mob("mobs_andes:dog", {
 
 		-- Follow owner logic
 		if self.tamed and self.owner and self.owner ~= "" then
+			if not self.order or self.order == "" then
+				self.order = "follow"
+			end
+			if not self._nametag or self._nametag == "" then
+				self._nametag = dog_names[math.random(#dog_names)]
+				self:update_tag()
+			end
 			local owner_player = core.get_player_by_name(self.owner)
 			if owner_player then
 				local o_pos = owner_player:get_pos()
@@ -325,8 +373,11 @@ mobs:register_mob("mobs_andes:dog", {
 						self.owner = player_name
 						self.static_save = true
 						self.order = "follow"
+						if not self._nametag or self._nametag == "" then
+							self._nametag = dog_names[math.random(#dog_names)]
+						end
 						self:update_tag()
-						core.chat_send_player(player_name, S("Dog has been tamed!"))
+						core.chat_send_player(player_name, S("@1 has been tamed!", self._nametag))
 					end
 					return
 				else
@@ -379,6 +430,7 @@ mobs:register_mob("mobs_andes:dog", {
 				self:set_animation("stand")
 				core.chat_send_player(player_name, S("Dog is now staying here."))
 			end
+			self:update_tag()
 		end
 	end
 })
@@ -389,8 +441,8 @@ mobs:register_mob("mobs_andes:dog", {
 mobs:register_egg(
 	"mobs_andes:dog",
 	S("Dog"),
-	"dogface.png",
-	1
+	"mobs_dog_inv.png",
+	0
 )
 
 -- ============================================================

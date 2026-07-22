@@ -372,7 +372,8 @@ for _, col in ipairs(alpaca_colours) do
 	mobs:register_egg(
 		"mobs_andes:alpaca_" .. col_key,
 		col_name,
-		"wool_" .. col_key .. ".png^" .. egg_overlay
+		"wool_" .. col_key .. ".png^" .. egg_overlay,
+		0
 	)
 
 	-- Compatibility alias (in case we rename later)

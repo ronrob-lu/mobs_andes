@@ -462,7 +462,8 @@ mobs:register_mob("mobs_andes:donkey", {
 mobs:register_egg(
 	"mobs_andes:donkey",
 	S("Donkey"),
-	"mobs_donkey_inv.png"
+	"mobs_donkey_inv.png",
+	0
 )
 
 -- ============================================================
