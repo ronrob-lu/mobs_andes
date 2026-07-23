@@ -20,7 +20,8 @@ Prized worldwide for their soft, warm fleece, these peaceful grazers roam the gr
 
 ### 🫏 The Donkey (*Equus asinus*)
 The ultimate high-altitude travel partner. Donkeys are exceptionally hardy pack animals that make traversing steep terrain a breeze.
-- **Riding & Autopilot**: Equip a donkey with a saddle to ride them! If you want to sit back and take in the view, enable the built-in **autopilot mode** (press your special/aux1 key) to let your mount navigate the path automatically.
+- **Riding & Saddle**: Right-click the donkey with a saddle (from the `mobs` / `mobs_redo` mod) to mount and ride it! *(Note: the equipped saddle is functional for riding, though it is not visually displayed on the donkey texture).*
+- **Autopilot Mode**: Want to sit back and take in the view? Toggle **autopilot mode** while riding by pressing your **Special / Aux1 key** (on desktop) or tapping the **Special / Aux1 button** (on Android touch controls). The donkey will navigate paths automatically. Touching any manual movement key or jump button disengages autopilot immediately (Manual Override).
 - **Behavior**: They wander grassy biomes, graze calmly, and follow players holding grass or wheat.
 
 ### 🐕 The Domestic Guard Dog (*Canis lupus familiaris*)
@@ -57,3 +58,7 @@ mobs_andes.dog = true
 - **Graphics (Models & Textures)**: Created by **ronrob-lu** and released under the **Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0)** license.
 - **Mod Framework**: Built on [mobs_redo](https://content.luanti.org/packages/TenPlus1/mobs/) by TenPlus1.
 - **Inspiration**: Inspired by the classic *mobs_animal* mod.
+
+---
+
+*Dedicated to Ben*
