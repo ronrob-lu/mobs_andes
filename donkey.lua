@@ -183,7 +183,7 @@ mobs:register_mob("mobs_andes:donkey", {
 	armor           = 100,
 
 	-- Physics
-	collisionbox    = {-0.4, -0.01, -0.4, 0.4, 1.6, 0.4},
+	collisionbox    = {-0.4, 0, -0.4, 0.4, 1.6, 0.4},
 	stepheight      = 0.6,
 	walk_velocity   = 1.2,
 	run_velocity    = 3.0,
@@ -430,6 +430,7 @@ mobs:register_mob("mobs_andes:donkey", {
 				inv:remove_item("main", "mobs:saddle")
 			end
 			core.sound_play("default_place_node", {pos = self.object:get_pos()}, true)
+			core.chat_send_player(clicker:get_player_name(), S("Saddle equipped! Right-click with an empty hand to ride."))
 			return
 		end
 
@@ -439,6 +440,8 @@ mobs:register_mob("mobs_andes:donkey", {
 		-- Mount donkey if saddled (does not require taming!)
 		if self.saddle and not self.child then
 			mobs.attach(self, clicker)
+		elseif not self.saddle and not self.child and item == "" then
+			core.chat_send_player(clicker:get_player_name(), S("You need to equip a saddle (mobs:saddle) to ride this donkey."))
 		end
 	end,
 
