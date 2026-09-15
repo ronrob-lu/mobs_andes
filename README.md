@@ -29,6 +29,11 @@ A loyal guardian for your homestead. The domestic guard dog is more than just a 
 - **Homestead Protection**: Once tamed with raw meat, your guard dog will follow you faithfully. If hostile mobs or intruders threaten you, your companion will immediately leap to your defense!
 - **Commands & Care**: Right-click your dog to order them to "stay" (guarding a specific spot) or "follow". Feed them meat to heal their wounds and permanently increase their maximum health.
 
+### 🐾 The Capybara (*Hydrochoerus hydrochaeris*)
+The world's largest rodent and friendliest creature. Capybaras roam wetland and riverside habitats.
+- **Chill & Swimming**: Completely peaceful animals that love to swim in rivers and lakes, floating naturally with custom swim animations, or lay down and chill on the shore.
+- **Grazing & Care**: They graze on riverside grass, reeds, and papyrus. Feed or tame them with grass, apples, or flora.
+
 ---
 
 ## Installation & Setup
@@ -48,6 +53,7 @@ mobs_andes.eat_grass_block = false
 mobs_andes.alpaca = true
 mobs_andes.donkey = true
 mobs_andes.dog = true
+mobs_andes.capybara = true
 ```
 
 ---

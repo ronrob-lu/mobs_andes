@@ -51,33 +51,41 @@ local dog_names = {
 }
 
 -- Helper: check if watchdog should attack the target
-local function should_attack(self, target)
-	-- Do not attack if dog is not tamed or has no owner
-	if not self.tamed or not self.owner or self.owner == "" then
+local function should_attack(self, target, force_defend)
+	if not target or target == self.object then
 		return false
 	end
 
-	-- Do not attack itself
-	if target == self.object then
+	-- Do not attack if damage is disabled
+	if not damage_enabled then
 		return false
 	end
+
+	local is_retaliation = force_defend or (self.attack == target)
 
 	-- Check player target
 	if target:is_player() then
 		local target_name = target:get_player_name()
-		-- Do not attack owner
-		if target_name == self.owner then
+		-- Never attack owner
+		if self.tamed and self.owner and target_name == self.owner then
 			return false
 		end
 		-- Do not attack if player is invisible or peaceful
 		if mobs:is_invisible(self, target_name) or is_peaceful_player(target) then
 			return false
 		end
-		-- Do not attack if damage is disabled or target is dead
-		if not damage_enabled or target:get_hp() <= 0 then
+		-- Do not attack dead players
+		if target:get_hp() <= 0 then
 			return false
 		end
-		return true
+
+		-- Only attack players if retaliating (the player attacked the dog or owner)
+		if is_retaliation then
+			return true
+		end
+
+		-- Do not auto-attack innocent players on sight
+		return false
 	end
 
 	-- Check mob target
@@ -88,13 +96,23 @@ local function should_attack(self, target)
 			return false
 		end
 
-		-- Is it a mob/monster/npc/animal?
-		local is_mob = ent._cmi_is_mob or ent.type == "monster" or ent.type == "npc" or ent.type == "animal"
-		if is_mob and ent.health and ent.health > 0 then
-			-- Check if it shares the same owner
-			if ent.owner and ent.owner ~= "" and ent.owner == self.owner then
-				return false
-			end
+		-- Check entity health
+		if not ent.health or ent.health <= 0 then
+			return false
+		end
+
+		-- Check if it shares the same owner
+		if self.tamed and self.owner and self.owner ~= "" and ent.owner and ent.owner == self.owner then
+			return false
+		end
+
+		-- Retaliate against any mob that attacked us (or owner)
+		if is_retaliation then
+			return true
+		end
+
+		-- Tamed watchdog auto-attacks hostile monsters to protect area/owner
+		if self.tamed and ent.type == "monster" then
 			return true
 		end
 	end
@@ -475,6 +493,30 @@ if not mobs.custom_spawn_andes then
 	})
 
 end
+
+-- ============================================================
+-- Defend Owner on Punch
+-- ============================================================
+core.register_on_punchplayer(function(player, hitter, time_from_last_punch, tool_capabilities, dir, damage)
+	if not player or not hitter or damage <= 0 then return end
+	local player_name = player:get_player_name()
+	if not player_name or player_name == "" then return end
+
+	local p_pos = player:get_pos()
+	if not p_pos then return end
+
+	-- Find nearby tamed dogs owned by this player and command them to defend the owner
+	local objs = core.get_objects_inside_radius(p_pos, 25)
+	for _, obj in ipairs(objs) do
+		local ent = obj:get_luaentity()
+		if ent and ent.name == "mobs_andes:dog" and ent.tamed and ent.owner == player_name then
+			if ent.state ~= "attack" and should_attack(ent, hitter, true) then
+				core.sound_play("mobs_andes_dog-bark-grrr", {object = ent.object, gain = 1.0, max_hear_distance = 15}, true)
+				ent:do_attack(hitter, true)
+			end
+		end
+	end
+end)
 
 -- ============================================================
 -- END OF FILE

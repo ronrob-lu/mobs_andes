@@ -10,6 +10,7 @@ Dog is now following you.=Le chien vous suit maintenant.
 Dog is now staying here.=Le chien reste ici maintenant.
 Dog=Chien
 Donkey=Âne
+Capybara=Capybara
 Donkey autopilot: ENABLED (W/S/A/D to manual control)=Pilote automatique de l'âne : ACTIVÉ (W/S/A/D pour le contrôle manuel)
 Donkey autopilot: DISABLED=Pilote automatique de l'âne : DÉSACTIVÉ
 Donkey autopilot: DISABLED (Manual Override)=Pilote automatique de l'âne : DÉSACTIVÉ (Contrôle manuel)
