@@ -1,0 +1,18 @@
+# textdomain: mobs_andes
+Light Fawn Alpaca=Vaaleanruskea alpakka
+Dark Fawn Alpaca=Tummanruskea alpakka
+Light Silver Gray Alpaca=Vaalean hopeanharmaa alpakka
+Light Fawn Alpaca Wool=Vaaleanruskea alpakan villa
+Dark Fawn Alpaca Wool=Tummanruskea alpakan villa
+Light Silver Gray Alpaca Wool=Vaalean hopeanharmaa alpakan villa
+Dog has been tamed!=Koira on kesytetty!
+Dog is now following you.=Koira seuraa nyt sinua.
+Dog is now staying here.=Koira jää nyt tähän.
+Dog=Koira
+Donkey=Aasi
+Capybara=Kapybara
+Donkey autopilot: ENABLED (W/S/A/D to manual control)=Aasin automaattiohjaus: KÄYTÖSSÄ (W/S/A/D manuaalista ohjausta varten)
+Donkey autopilot: DISABLED=Aasin automaattiohjaus: POIS KÄYTÖSTÄ
+Donkey autopilot: DISABLED (Manual Override)=Aasin automaattiohjaus: POIS KÄYTÖSTÄ (Manuaalinen ohjaus)
+[MOD] Mobs Andes loaded=[MOD] Mobs Andes ladattu
+[Mobs_Andes] @1 disabled via settings.=[Mobs_Andes] @1 poistettu käytöstä asetusten kautta.
